@@ -3,11 +3,50 @@
  * This class represents a Ball object. When combined with the GameArena class,
  * instances of the Ball class can be displayed on the screen.
  */
+import java.lang.Math;
+
 public class Ball{
   private double[] position = new double[2];
   private double[] velocity = new double[2];
-	private double size;
+	private double size; // diameter
 	private String colour = "WHITE";
+  
+  /**
+  * Basic Constructor
+  * @param x The starting X position of the ball
+  * @param y The starting Y position of the ball
+  * @param diameter The diameter of the call, in pixels
+  * @param col The colour of the ball, can take RGB values or common colours as strings
+  */
+	public Ball(double x, double y, double diameter, String col){
+		position[0] = x;
+		position[1] = y;
+		size = diameter;
+		colour = col;
+	}	
+
+  /**
+  * Checks if a ball is colliding with a paddle
+  * @return true if ball is colliding with paddle, false if not
+  */
+  public boolean colliding(Paddle paddle){
+    
+    double dx = Math.abs( this.position[0] - (double)paddle.getRectangle().getXPosition() );
+    double dy = Math.abs( this.position[1] - (double)paddle.getRectangle().getYPosition() );
+    
+    if(dx > paddle.getRectangle().getWidth()/2 +size/2 ){
+      return false;
+    }
+    if(dy > paddle.getRectangle().getHeight()/2+size/2){
+      return false;
+    }
+    // TODO
+    // ** NOT FINISHED ** 
+    // TODO
+    // ** re-model this is check if colliding with a rectangle, 
+    // and use paddle.getRectangle() when calling this method **
+    return true;
+  }
   
 	/**
 	 * Obtains the current position of this Ball.
@@ -66,18 +105,4 @@ public class Ball{
 	public String getColour(){
 		return colour;
 	}
-
-  /**
-  * Basic Constructor
-  * @param x The starting X position of the ball
-  * @param y The starting Y position of the ball
-  * @param diameter The diameter of the call, in pixels
-  * @param col The colour of the ball, can take RGB values or common colours as strings
-  */
-	public Ball(double x, double y, double diameter, String col){
-		position[0] = x;
-		position[1] = y;
-		size = diameter;
-		colour = col;
-	}	
 }

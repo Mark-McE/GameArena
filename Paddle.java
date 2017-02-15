@@ -47,6 +47,14 @@ public class Paddle{
 		return paddleHeight;
 	}
 	
+  /**
+  * obtains the rectangle class used to represent the paddle
+  * @return the rectangle used as the sprite
+  */
+  public Rectangle getRectangle(){
+    return paddleRectangle;
+  }
+  
 	/**
 	 * Sets the height of the paddle
 	 * @param newHeight the new height of the paddle
