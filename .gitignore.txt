@@ -1,3 +1,4 @@
 LICENSE
 /Samples
 .gitignore
+*.class
