@@ -12,8 +12,8 @@ public class BrickBreakerWeek15{
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
     Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, "cyan", 50);
-    
     playerPaddle.addPaddle(gameWindow);
+    
     
     while(true){
       if(gameWindow.rightPressed()){
@@ -25,5 +25,4 @@ public class BrickBreakerWeek15{
       gameWindow.pause();
     }
   }
-  
 }

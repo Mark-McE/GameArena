@@ -3,22 +3,15 @@
  * This class represents a Rectabgle object. When combined with the GameArena class,
  * instances of the Rectangle class can be displayed on the screen.
  */
-public class Rectangle 
-{
-	// The following instance variables define the
-	// information needed to represent a Rectangle
-	// Feel free to more instance variables if you think it will 
-	// support your work... 
+public class Rectangle{
 	
-	private double xPosition;			// The X coordinate of centre of this Rectangle
-	private double yPosition;			// The Y coordinate of centre of this Rectangle
-	private double width;				// The width of this Rectangle
-	private double height;				// The height of this Rectangle
-	private String colour = "WHITE";	// The colour of this Rectangle
-
-										// Permissable colours are 8 bit hexadecimal 
+	private double xPosition;
+	private double yPosition;
+	private double width;
+	private double height;
+	private String colour = "WHITE";
+                                        // Permissable colours are 8 bit hexadecimal 
                                         // RGB values in the format #RRGGBB. e.g.
-                                        //
                                         // Pure red is FF0000
                                         // Pure red is 00FF00
                                         // Pure red is 0000FF
@@ -27,8 +20,7 @@ public class Rectangle
 	 * Obtains the current position of this Rectangle.
 	 * @return the X coordinate of this Rectangle within the GameArena.
 	 */
-	public double getXPosition()
-	{
+	public double getXPosition(){
 		return xPosition;
 	}
 
@@ -36,8 +28,7 @@ public class Rectangle
 	 * Obtains the current position of this Rectangle.
 	 * @return the Y coordinate of this Rectangle within the GameArena.
 	 */
-	public double getYPosition()
-	{
+	public double getYPosition(){
 		return yPosition;
 	}
 
@@ -45,8 +36,7 @@ public class Rectangle
 	 * Moves the current position of this Rectangle to the given X co-ordinate
 	 * @param x the new x co-ordinate of this Rectangle
 	 */
-	public void setXPosition(double x)
-	{
+	public void setXPosition(double x){
 		this.xPosition = x;
 	}
 
@@ -54,8 +44,7 @@ public class Rectangle
 	 * Moves the current position of this Rectangle to the given Y co-ordinate
 	 * @param y the new y co-ordinate of this Rectangle
 	 */
-	public void setYPosition(double y)
-	{
+	public void setYPosition(double y){
 		this.yPosition = y;
 	}
 
@@ -63,31 +52,51 @@ public class Rectangle
 	 * Obtains the width of this Rectangle.
 	 * @return the width of this Rectangle,in pixels.
 	 */
-	public double getWidth()
-	{
+	public double getWidth(){
 		return width;
+	}
+  
+	/**
+	 * sets the width of this Rectangle.
+   * @param w the new width
+	 */
+	public void setWidth(double w){
+    width = w;
 	}
 
 	/**
 	 * Obtains the height of this Rectangle.
 	 * @return the height of this Rectangle,in pixels.
 	 */
-	public double getHeight()
-	{
+	public double getHeight(){
 		return height;
+	}
+
+	/**
+	 * sets the height of this Rectangle.
+   * @param h the new height
+	 */
+	public void setHeight(double h){
+    height = h;
 	}
 
 	/**
 	 * Obtains the colour of this Rectangle.
 	 * @return a textual description of the colour of this Rectangle.
 	 */
-	public String getColour()
-	{
+	public String getColour(){
 		return colour;
 	}
 
-	public Rectangle(double x, double y, double w, double h, String col)
-	{
+	/**
+	 * sets the colour of this Rectangle.
+   * @param col the new colour
+	 */
+	public void setColour(String col){
+		colour = col;
+	}
+
+	public Rectangle(double x, double y, double w, double h, String col){
 		xPosition = x;
 		yPosition = y;
 		width = w;

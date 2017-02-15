@@ -4,11 +4,13 @@
  */
 public class Paddle{
 	
-	private int xPosition; 
-	private int yPosition; 
-	private int paddleWidth; 
-	private String colour; 
-	private int paddleHeight;
+	private int xPosition = 0; 
+	private int yPosition = 0; 
+	private int paddleWidth = 10; 
+	private int paddleHeight = 10;
+	private String colour = "White"; 
+	private Rectangle paddleRectangle = new Rectangle(xPosition, yPosition, paddleWidth, paddleHeight, colour);
+    
 	/**
   * Basic Constructor, defaults height to 20 pixels
   * @param xPos The starting X position for the paddle
@@ -20,11 +22,23 @@ public class Paddle{
 		xPosition = xPos;
 		yPosition = yPos;
 		paddleWidth = width;
-		colour = col;
 	  paddleHeight = 20;
+		colour = col;
+    
+    updateSprite();
 	}
 	
-	
+  /**
+  * Updates the sprite to correctly represent the variables of the Paddle.
+  */
+	private void updateSprite(){
+    paddleRectangle.setXPosition(xPosition);
+    paddleRectangle.setYPosition(yPosition);
+    paddleRectangle.setWidth(paddleWidth);
+    paddleRectangle.setHeight(paddleHeight);
+    paddleRectangle.setColour(colour);
+  }
+  
 	/**
 	 * Obtains the current height of the paddle.
 	 * @return the height of the paddle as int.
@@ -39,6 +53,7 @@ public class Paddle{
 	 */
 	public void setHeight(int newHeight){
 		paddleHeight = newHeight;
+    updateSprite();
 	}
 	
 	/**
@@ -46,17 +61,15 @@ public class Paddle{
 	 * @param GameArena The game arena to add the paddle to
 	 */
 	public void addPaddle(GameArena gameWindow){
-		Rectangle paddleRectangle = new Rectangle(xPosition, yPosition, paddleWidth, paddleHeight, colour);
 		gameWindow.addRectangle(paddleRectangle);
 	}
-	
+  
 	/**
 	 * Moves the paddle
 	 * @param xShift The x-shift of the paddle
 	 */
 	public void move(int shift){
-		xPosition = xPosition + shift;
+		xPosition += shift;
+    updateSprite();
 	}
-	
-	
 }
