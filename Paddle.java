@@ -4,10 +4,11 @@
  */
 public class Paddle {
 	
-	public int xPosition; 
-	public int yPosition; 
-	public int paddleWidth; 
-	public String colour; 
+	private int xPosition; 
+	private int yPosition; 
+	private int paddleWidth; 
+	private String colour; 
+	private int paddleHeight = 30;
 	
 	public Paddle(int xPos, int yPos, String col, int paddleWidth)
 	{
@@ -18,7 +19,6 @@ public class Paddle {
 		colour = col;
 	}
 	
-	private int paddleHeight = 30;
 	
 	/**
 	 * Obtains the current height of the paddle.
