@@ -1,69 +1,61 @@
 /**
- * Models a simple solid sphere. 
+ * Models a simple circle. 
  * This class represents a Ball object. When combined with the GameArena class,
  * instances of the Ball class can be displayed on the screen.
  */
-public class Ball 
-{
-	// The following instance variables define the
-	// information needed to represent a Ball
-	// Feel free to more instance variables if you think it will 
-	// support your work... 
-	
-	private double xPosition;			// The X coordinate of this Ball
-	private double yPosition;			// The Y coordinate of this Ball
-	private double size;				// The diameter of this Ball
-	private String colour = "WHITE";	// The colour of this Ball
-
-										// Permissable colours are 8 bit hexadecimal 
-                                        // RGB values in the format #RRGGBB. e.g.
-                                        //
-                                        // Pure red is FF0000
-                                        // Pure red is 00FF00
-                                        // Pure red is 0000FF
-
+public class Ball{
+  private double[] position = new double[2];
+  private double[] velocity = new double[2];
+	private double size;
+	private String colour = "WHITE";
+  
 	/**
 	 * Obtains the current position of this Ball.
-	 * @return the X coordinate of this Ball within the GameArena.
+	 * @return the position vector of this Ball within the GameArena.
 	 */
-	public double getXPosition()
-	{
-		return xPosition;
+	public double[] getPosition(){
+		return position;
+	}
+  
+  // legacy code required for gameArena class
+	public double getXPosition(){
+		return position[0];
+	}
+	public double getYPosition(){
+		return position[1];
 	}
 
 	/**
-	 * Obtains the current position of this Ball.
-	 * @return the Y coordinate of this Ball within the GameArena.
+	 * Obtains the current velocity of this Ball.
+	 * @return the velocity vector of this Ball within the GameArena.
 	 */
-	public double getYPosition()
-	{
-		return yPosition;
+	public double[] getVelocity(){
+		return velocity;
 	}
 
 	/**
 	 * Moves the current position of this Ball to the given co-ordinates
-	 * @param x the new x co-ordinate of this Ball
+	 * @param pos the new position vector of this Ball
 	 */
-	public void setXPosition(double x)
-	{
-		this.xPosition = x;
+	public void setPosition(double[] pos){
+		this.position[0] = pos[0];
+		this.position[1] = pos[1];
 	}
 
 	/**
-	 * Moves the current position of this Ball to the given co-ordinates
-	 * @param y the new y co-ordinate of this Ball
+	 * Changes the current velocity of this Ball to the given vector
+	 * @param vel the new velocity vector of this Ball
 	 */
-	public void setYPosition(double y)
-	{
-		this.yPosition = y;
+	public void setVelocity(double[] vel){
+		this.velocity[0] = vel[0];
+		this.velocity[1] = vel[1];
 	}
 
 	/**
 	 * Obtains the size of this Ball.
 	 * @return the diameter of this Ball,in pixels.
 	 */
-	public double getSize()
-	{
+	public double getSize(){
 		return size;
 	}
 
@@ -71,17 +63,20 @@ public class Ball
 	 * Obtains the colour of this Ball.
 	 * @return a textual description of the colour of this Ball.
 	 */
-	public String getColour()
-	{
+	public String getColour(){
 		return colour;
 	}
 
-
-	public Ball(double x, double y, double diameter, String col)
-	{
-		xPosition = x;
-		yPosition = y;
-
+  /**
+  * Basic Constructor
+  * @param x The starting X position of the ball
+  * @param y The starting Y position of the ball
+  * @param diameter The diameter of the call, in pixels
+  * @param col The colour of the ball, can take RGB values or common colours as strings
+  */
+	public Ball(double x, double y, double diameter, String col){
+		position[0] = x;
+		position[1] = y;
 		size = diameter;
 		colour = col;
 	}	

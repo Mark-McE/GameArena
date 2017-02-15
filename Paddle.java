@@ -2,21 +2,26 @@
  * Operates the players paddle. 
  * This class represents a Paddle
  */
-public class Paddle {
+public class Paddle{
 	
 	private int xPosition; 
 	private int yPosition; 
 	private int paddleWidth; 
 	private String colour; 
-	private int paddleHeight = 30;
-	
-	public Paddle(int xPos, int yPos, String col, int paddleWidth)
-	{
+	private int paddleHeight;
+	/**
+  * Basic Constructor, defaults height to 20 pixels
+  * @param xPos The starting X position for the paddle
+  * @param yPos The starting Y position for the paddle
+  * @param col The colour of the paddle
+  * @param width The width of the paddle
+  */
+	public Paddle(int xPos, int yPos, String col, int width){
 		xPosition = xPos;
 		yPosition = yPos;
-
-		paddleWidth = paddleWidth;
+		paddleWidth = width;
 		colour = col;
+	  paddleHeight = 20;
 	}
 	
 	
