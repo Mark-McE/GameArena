@@ -79,11 +79,11 @@ public class Ball{
     double dxSigned = rec.getXPosition() - this.position[0];
     double dySigned = rec.getYPosition() - this.position[1];
     
-    if( Math.signum(velocity[1]) != Math.signum( dxSigned ) ){
+    if( Math.signum(velocity[1]) == Math.signum( dySigned ) ){
       this.velocity[1] *= -1;
     }
     
-    // TODO x velocity resolvolution
+    
     
   }
   
