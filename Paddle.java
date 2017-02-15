@@ -2,7 +2,21 @@
  * Operates the players paddle. 
  * This class represents a Paddle
  */
-public class Paddle(int xPosition, int yPosition, String colour, int paddleWidth) {
+public class Paddle {
+	
+	public int xPosition; 
+	public int yPosition; 
+	public int paddleWidth; 
+	public String colour; 
+	
+	public Paddle(int xPos, int yPos, String col, int paddleWidth)
+	{
+		xPosition = xPos;
+		yPosition = yPos;
+
+		paddleWidth = paddleWidth;
+		colour = col;
+	}
 	
 	private int paddleHeight = 30;
 	
