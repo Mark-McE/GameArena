@@ -10,7 +10,6 @@ public class BrickBreakerLevels{
   }
   
   private void level_1(GameArena ga){
-    //**************************
     //******level layout********
     //**************************
     //**■■■■■■■■■■■■■■■■■■■■■■**
@@ -22,12 +21,13 @@ public class BrickBreakerLevels{
     //**■■■■■■■■■■■■■■■■■■■■■■**
     //**************************
     //**************************
+    //**************************
     //************o*************
     //**********----************
     int brickWidth = 55;
     int brickHeight = 20;
     
-    for(int j=ga.getArenaHeight()*2/7; j<=ga.getArenaHeight()*9/14; j+=(brickHeight+10) ){
+    for(int j=ga.getArenaHeight()*1/7; j<=ga.getArenaHeight()*7/14; j+=(brickHeight+10) ){
       for (int i=brickWidth; i<ga.getArenaWidth()-brickWidth; i+=brickWidth){
         bricks.add( new Brick( i, j, brickWidth, brickHeight, "white" ) );
       }
