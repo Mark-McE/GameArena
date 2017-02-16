@@ -23,11 +23,8 @@ public class BrickBreakerWeek15{
     //bricks.add( new Brick( windowLength/4,windowHeight/4,70,20,"white" ) );
     //bricks.get(0).addBrick(gameWindow);
    
-   // level loading plans
-   /*
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
-    levels.load(1); 
-    */
+    levels.load(1, gameWindow); 
     
     while(true){
       if(gameWindow.rightPressed()){
