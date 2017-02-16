@@ -66,7 +66,7 @@ public class Ball{
   }
   
   /**
-  * Resolves collisions with this ball and a passed rectangle
+  * Resolves collisions with this ball and a passed Paddle
   * by updating this ball's velocity vector
   * resolved x velocity is set to a function of how far from the center
   * of the paddle we collide
@@ -87,6 +87,34 @@ public class Ball{
       double percentXDistance = ( dxSigned )/( rec.getWidth()/2 );
       this.velocity[0] = maxVel*percentXDistance*-1;
     }
+  }
+  
+  /**
+  * Resolves collision elastically with this ball and a passed Rectangle
+  * by updating this ball's velocity vector
+  * @param rec The Rectangle this ball is colliding with
+  */
+  public void resolveCollision(Rectangle rec){
+    
+    // direction is, ball --> rectangle
+    double dySigned = rec.getYPosition() - this.position[1];
+    double dxSigned = rec.getXPosition() - this.position[0] ;
+    double maxVel = 10;
+    
+    // if ball above brick, and travelling towards brick
+    if( Math.signum(velocity[1]) == Math.signum( dySigned ) 
+    &&  Math.abs( dySigned ) >= rec.getHeight()/2
+    ){
+      this.velocity[1] *= -1;
+    }
+    if( Math.signum(velocity[0]) == Math.signum( dxSigned )
+    &&  Math.abs( dxSigned ) >= rec.getWidth()/2
+    ){
+      this.velocity[0] *= -1;
+    }
+    
+    
+    
   }
   
   /**

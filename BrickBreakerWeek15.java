@@ -1,3 +1,4 @@
+import java.util.*;
 /**
 * Driver class to represent a brick breaker type game.
 * 
@@ -11,11 +12,15 @@ public class BrickBreakerWeek15{
     int windowLength = 500;
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, "cyan", 70);
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 70, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
     Ball ball = new Ball(windowLength/2,windowHeight/2,0,5,10,"yellow");
     gameWindow.addBall(ball);
+    
+    List<Brick> bricks = new ArrayList<Brick>();
+    bricks.add( new Brick( windowLength/4,windowHeight/4,70,20,"white" ) );
+    bricks.get(0).addBrick(gameWindow);
     
     while(true){
       if(gameWindow.rightPressed()){
@@ -28,9 +33,17 @@ public class BrickBreakerWeek15{
         ball.resolvePaddleCollision(playerPaddle);
       }
       
-      // if(ball.colliding(brick.getRectangle())
-      //   ball.resolveCollision(brick.getRectangle());
-      // brick.remove();
+      for(int b = 0; b<bricks.size(); b++){
+        if(ball.colliding( bricks.get(b).getRectangle() ) ){
+          
+          
+          ball.resolveCollision(bricks.get(b).getRectangle());
+          bricks.get(b).remove(gameWindow);
+          bricks.remove(bricks.get(b));
+          
+          
+        }
+      }
       
       ball.resolveWallCollisions(windowLength,windowHeight);
       ball.updatePos();

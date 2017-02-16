@@ -18,7 +18,7 @@ public class Paddle{
   * @param col The colour of the paddle
   * @param width The width of the paddle
   */
-	public Paddle(int xPos, int yPos, String col, int width){
+	public Paddle(int xPos, int yPos, int width, String col){
 		xPosition = xPos;
 		yPosition = yPos;
 		paddleWidth = width;
