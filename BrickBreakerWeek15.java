@@ -10,6 +10,8 @@ public class BrickBreakerWeek15{
     
     int windowHeight = 700;
     int windowLength = 500;
+    int frames = 10;
+    
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
     Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 70, "cyan");
@@ -26,18 +28,12 @@ public class BrickBreakerWeek15{
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
     levels.load(1, gameWindow);
     
-    while(true){
-      if(gameWindow.rightPressed()){
-        playerPaddle.move(7);
-      }
-      if(gameWindow.leftPressed()){
-        playerPaddle.move(-7);
-      }
-      // check for ball-paddle collisions
+    for(int i=0;;i++){
+      // ball-paddle collisions
       if( ball.colliding( playerPaddle.getRectangle() ) ){
         ball.resolvePaddleCollision(playerPaddle);
       }
-      // for all bricks, check for ball-brick collisions
+      // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
         if(ball.colliding( bricks.get(b).getRectangle() ) ){
           ball.resolveCollision(bricks.get(b).getRectangle());
@@ -45,10 +41,21 @@ public class BrickBreakerWeek15{
           bricks.remove(bricks.get(b));
         }
       }
-      
+      // ball-wall collisions
       ball.resolveWallCollisions(gameWindow);
-      ball.updatePos();
-      gameWindow.pause();
+      
+      if(i%frames==0){
+        // player controls
+        if(gameWindow.rightPressed()){
+          playerPaddle.move(7);
+        }
+        if(gameWindow.leftPressed()){
+          playerPaddle.move(-7);
+        }
+        
+        gameWindow.pause();
+      }
+      ball.updatePosFraction(frames);
     }
   }
 }

@@ -99,4 +99,13 @@ public class Brick{
     updateSprite();
 	}
 	
+  /**
+  * Sets the brick's colour
+  * @param col The new colour
+  */
+  public void setColour(String col){
+    colour = col;
+    updateSprite();
+  }
+  
 }

@@ -1,10 +1,9 @@
+import java.lang.Math;
 /**
  * Models a simple circle. 
  * This class represents a Ball object. When combined with the GameArena class,
  * instances of the Ball class can be displayed on the screen.
  */
-import java.lang.Math;
-
 public class Ball{
   private double[] position = new double[2];
   private double[] velocity = new double[2];
@@ -157,6 +156,10 @@ public class Ball{
     this.position[1] += this.velocity[1];
   }
   
+  public void updatePosFraction(double fraction){
+    this.position[0] += (this.velocity[0]/fraction);
+    this.position[1] += (this.velocity[1]/fraction);
+  }
   
 	/**
 	 * Obtains the current position of this Ball.
