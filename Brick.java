@@ -74,6 +74,15 @@ public class Brick{
 	}
 	
   /**
+  * obtains the position of the brick 
+  * @return An x-y vector for the position
+  */
+  public int[] getPosition(){
+    int[] position = {xPosition, yPosition};
+    return position;
+  }
+  
+  /**
   * obtains the rectangle class used to represent the brick
   * @return the rectangle used as the sprite
   */

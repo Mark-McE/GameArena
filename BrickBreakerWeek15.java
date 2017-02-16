@@ -24,7 +24,7 @@ public class BrickBreakerWeek15{
     //bricks.get(0).addBrick(gameWindow);
    
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
-    levels.load(1, gameWindow); 
+    levels.load(1, gameWindow);
     
     while(true){
       if(gameWindow.rightPressed()){

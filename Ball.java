@@ -79,10 +79,10 @@ public class Ball{
     // direction is, ball --> rectangle
     double dySigned = rec.getYPosition() - this.position[1];
     double dxSigned = rec.getXPosition() - this.position[0] ;
-    double maxVel = 10;
+    double maxVel = 8;
     
     if(velocity[1] == 0){
-      velocity[1] = maxVel;
+      velocity[1] = 8;
     }
     if( Math.signum(velocity[1]) == Math.signum( dySigned ) ){
       this.velocity[1] *= -1;
