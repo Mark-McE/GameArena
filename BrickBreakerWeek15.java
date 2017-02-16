@@ -24,13 +24,15 @@ public class BrickBreakerWeek15{
       if(gameWindow.leftPressed()){
         playerPaddle.move(-5);
       }
-      
-      if( ball.colliding(playerPaddle.getRectangle() )){
+      if( ball.colliding( playerPaddle.getRectangle() ) ){
         ball.resolvePaddleCollision(playerPaddle);
       }
       
-      ball.resolveWallCollisions(windowLength,windowHeight);
+      // if(ball.colliding(brick.getRectangle())
+      //   ball.resolveCollision(brick.getRectangle());
+      // brick.remove();
       
+      ball.resolveWallCollisions(windowLength,windowHeight);
       ball.updatePos();
       gameWindow.pause();
     }

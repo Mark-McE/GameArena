@@ -30,6 +30,7 @@ public class Paddle{
 	
   /**
   * Updates the sprite to correctly represent the variables of the Paddle.
+  * only to be used within the paddle class
   */
 	private void updateSprite(){
     paddleRectangle.setXPosition(xPosition);

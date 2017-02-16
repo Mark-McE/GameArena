@@ -106,10 +106,11 @@ public class Ball{
       this.velocity[0] *= -1;
     }
     // collisions with bottom and top wall
-    if(
+    // removed bottom wall collisions due to nature of the brick breaker
+    if(/*
     (  this.position[1] + this.size/2 >= windowHeight
     && this.velocity[1] > 0 )
-    ||
+    || */
     (  this.position[1] - this.size/2 <= 0
     && this.velocity[1] < 0 ))
     {
