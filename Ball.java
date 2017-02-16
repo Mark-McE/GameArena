@@ -76,15 +76,17 @@ public class Ball{
   public void resolvePaddleCollision(Paddle paddle){
     Rectangle rec = paddle.getRectangle();
     
-    double dxSigned = rec.getXPosition() - this.position[0];
+    // direction is, ball --> rectangle
     double dySigned = rec.getYPosition() - this.position[1];
+    double dx =  rec.getXPosition() - this.position[0] ;
+    double maxVel = 10;
     
     if( Math.signum(velocity[1]) == Math.signum( dySigned ) ){
       this.velocity[1] *= -1;
+    
+      double percentXDistance = ( dx )/( rec.getWidth()/2 );
+      this.velocity[0] = maxVel*percentXDistance*-1;
     }
-    
-    
-    
   }
   
   /**

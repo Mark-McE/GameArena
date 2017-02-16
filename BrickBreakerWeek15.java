@@ -11,7 +11,7 @@ public class BrickBreakerWeek15{
     int windowLength = 500;
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, "cyan", 50);
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, "cyan", 70);
     playerPaddle.addPaddle(gameWindow);
     
     Ball ball = new Ball(windowLength/2,windowHeight/2,0,5,10,"yellow");
