@@ -81,6 +81,9 @@ public class Ball{
     double dxSigned = rec.getXPosition() - this.position[0] ;
     double maxVel = 10;
     
+    if(velocity[1] == 0){
+      velocity[1] = maxVel;
+    }
     if( Math.signum(velocity[1]) == Math.signum( dySigned ) ){
       this.velocity[1] *= -1;
     
@@ -122,10 +125,10 @@ public class Ball{
   * @param windowWidth The width of the game arena
   * @param windowHeight The height of the game arena
   */
-  public void resolveWallCollisions(int windowWidth, int windowHeight){
+  public void resolveWallCollisions(GameArena ga){
     // collisions with right and left wall
     if(
-    (  this.position[0] + this.size/2 >= windowWidth
+    (  this.position[0] + this.size/2 >= ga.getArenaWidth()
     && this.velocity[0] > 0 )
     ||
     (  this.position[0] - this.size/2 <= 0
@@ -136,7 +139,7 @@ public class Ball{
     // collisions with bottom and top wall
     // removed bottom wall collisions due to nature of the brick breaker
     if(/*
-    (  this.position[1] + this.size/2 >= windowHeight
+    (  this.position[1] + this.size/2 >= ga.getArenaHeight()
     && this.velocity[1] > 0 )
     || */
     (  this.position[1] - this.size/2 <= 0
