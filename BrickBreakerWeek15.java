@@ -6,11 +6,25 @@ import java.util.*;
 * @author Chris Bartzis
 **/
 public class BrickBreakerWeek15{
+  
+  private static void updatePowers(boolean[] powers, Brick b){
+    for(int i=0; i<powers.length; i++){
+      if(b.getColour().equals(b.powers[i][1])){
+        powers[i]=true;
+      }
+    }
+  }
+  
   public static void main( String[] args ){
     
     int windowHeight = 700;
     int windowLength = 500;
     int frames = 10;
+    
+    boolean[] currentPowers = new boolean[Brick.powers.length];
+    for(int i=0; i<currentPowers.length; i++){
+      currentPowers[i] = false;
+    }
     
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
@@ -21,10 +35,6 @@ public class BrickBreakerWeek15{
     gameWindow.addBall(ball);
     
     List<Brick> bricks = new ArrayList<Brick>();
-    // test brick
-    //bricks.add( new Brick( windowLength/4,windowHeight/4,70,20,"white" ) );
-    //bricks.get(0).addBrick(gameWindow);
-   
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
     levels.load(1, gameWindow);
     
@@ -36,7 +46,9 @@ public class BrickBreakerWeek15{
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
         if(ball.colliding( bricks.get(b).getRectangle() ) ){
-          ball.resolveCollision(bricks.get(b).getRectangle());
+          if(!currentPowers[1])
+            ball.resolveCollision(bricks.get(b).getRectangle());
+          updatePowers(currentPowers,bricks.get(b));
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
         }

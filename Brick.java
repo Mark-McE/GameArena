@@ -9,6 +9,8 @@ public class Brick{
 	private int brickHeight = 10;
 	private String colour = "White"; 
 	private Rectangle brickRectangle = new Rectangle(xPosition, yPosition, brickWidth, brickHeight, colour);
+  
+  public static String[][] powers = {{"bigPaddle", "Red"},{"noCollide","Cyan"}};
     
 	/**
   * Basic Constructor
@@ -73,6 +75,10 @@ public class Brick{
 		return brickHeight;
 	}
 	
+  public String getColour(){
+    return colour;
+  }
+  
   /**
   * obtains the position of the brick 
   * @return An x-y vector for the position
