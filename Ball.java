@@ -156,6 +156,11 @@ public class Ball{
     this.position[1] += this.velocity[1];
   }
   
+  /**
+  * updates the ball's position by a fraction of it's speed
+  * @param fraction The number to divide the speed by. 
+  * Updating the speed by half of it's speed, then fraction = 2.
+  */
   public void updatePosFraction(double fraction){
     this.position[0] += (this.velocity[0]/fraction);
     this.position[1] += (this.velocity[1]/fraction);
@@ -169,11 +174,19 @@ public class Ball{
 		return position;
 	}
   
-  // legacy code required for gameArena class
+  /**
+  * legacy code required for gameArena class
+  * do not build more dependancies upon this method
+  */
 	public double getXPosition(){
 		return position[0];
 	}
-	public double getYPosition(){
+	
+  /**
+  * legacy code required for gameArena class
+  * do not build more dependancies upon this method
+  */
+  public double getYPosition(){
 		return position[1];
 	}
 

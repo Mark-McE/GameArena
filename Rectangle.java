@@ -56,20 +56,11 @@ public class Rectangle{
 		return width;
 	}
   
-	/**
-	 * sets the width of this Rectangle.
-   * @param w the new width
-	 */
-	public void setWidth(double w){
-    width = w;
-	}
-
-    /**
+  /**
      * Defines a new width for this Rectangle.
      * @param width The new width of this rectangle, in pixels.
 	 */
-	public void setWidth(double width)
-	{
+	public void setWidth(double width){
 		this.width = width;
 	}
 
@@ -81,21 +72,12 @@ public class Rectangle{
 		return height;
 	}
 
-    /**
+  /**
      * Defines a new width for this Rectangle.
      * @param height The new height of this rectangle, in pixels.
 	 */
-	public void setHeight(double height)
-	{
+	public void setHeight(double height){
 		this.height = height;
-	}
-
-	/**
-	 * sets the height of this Rectangle.
-   * @param h the new height
-	 */
-	public void setHeight(double h){
-    height = h;
 	}
 
 	/**
@@ -110,20 +92,19 @@ public class Rectangle{
 	 * Changes the colour of this Rectangle
 	 * @param input the new colour of this Rectangle
 	 */
-	
-	public void setColour(String input)
-	{
+	public void setColour(String input){
 		this.colour = input;
 	}
-
-	/**
-	 * sets the colour of this Rectangle.
-   * @param col the new colour
-	 */
-	public void setColour(String col){
-		colour = col;
-	}
-
+  
+  /**
+  * Basic constructor
+  * @param x The x coorinate for the center of the rectangle
+  * @param y The y coorinate for the center of the rectangle
+  * @param w The width of the rectangle
+  * @param h The Height of the rectangle
+  * @param col The colour of the rectangle. 
+  * Can be hex values or common colour names supported by java
+  */
 	public Rectangle(double x, double y, double w, double h, String col){
 		xPosition = x;
 		yPosition = y;

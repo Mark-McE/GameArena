@@ -7,6 +7,10 @@ import java.util.*;
 **/
 public class BrickBreakerWeek15{
   
+  /**
+  * Adds one second to the timer varaible for all active powerUp classes.
+  * Will set PowerUp.active to false if timer is reduced to 0.
+  */
   private static void updatePowerUpTimers(PowerUp[] powers, Ball ball, Paddle paddle){
     for(int i =0; i<powers.length; i++){
       if(powers[i].getActive()){
@@ -15,12 +19,15 @@ public class BrickBreakerWeek15{
           powers[i].setActive(false);
           ball.setColour("yellow");
           paddle.setColour("Cyan");
-          paddle.setWidth(200);
+          paddle.setWidth(70);
         }
       }
     }
   }
   
+  /**
+  * Activates power ups if the currently hit brick contains a power up.
+  */
   private static void addPowers(PowerUp[] powers, Brick b, Ball ball, Paddle paddle){
     for(int i=0; i<powers.length; i++){
       if(b.getColour().equals(b.powers[i][1])){
@@ -57,7 +64,7 @@ public class BrickBreakerWeek15{
     
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 200, "cyan");
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 70, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
     Ball playerBall = new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow");

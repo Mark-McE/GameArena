@@ -65,11 +65,19 @@ public class Paddle{
     updateSprite();
 	}
 	
+  /**
+  * Sets the width of the paddle
+  * @param newWidth The new width
+  */
   public void setWidth(int newWidth){
     paddleWidth = newWidth;
     updateSprite();
   }
   
+  /**
+  * Sets the colour of this paddle
+  * @param col The new colour for the paddle
+  */
   public void setColour(String col){
     colour = col;
     updateSprite();

@@ -1,11 +1,16 @@
 import java.util.*;
 import java.lang.Math;
 /**
-* Class to store all levels of brick breaker
+* Stores all levels of the brick breaker game.
+* With methods to load the levels into an arrayList of Bricks, and add them to the GameArena
 */
 public class BrickBreakerLevels{
   private List<Brick> bricks;
   
+  /**
+  * Basic constructor
+  * @param bs The arrayList of bricks which the game is using
+  */
   public BrickBreakerLevels(List<Brick> bs){
     bricks = bs;
   }
@@ -45,6 +50,19 @@ public class BrickBreakerLevels{
     //bricks.add( new Brick( /**/ ) );
   }
   
+  private void level_win(GameArena g){
+    //bricks.add( new Brick( /**/ ) );
+  }
+  
+  private void level_lose(GameArena ga){
+    //bricks.add( new Brick( /**/ ) );
+  }
+  
+  /**
+  * Loads levels onto the GameArena
+  * @param level The level to load
+  * @param gameWindow The GameArena to load the level onto.
+  */
   public void load(int level, GameArena gameWindow){
     
     boolean validLevel;
