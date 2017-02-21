@@ -44,7 +44,7 @@ public class Brick{
   
 	/**
 	 * Inits the brick in the given game arena
-	 * @param GameArena The game arena to add the brick to
+	 * @param gameWindow The game arena to add the brick to
 	 */
 	public void addBrick(GameArena gameWindow){
 		gameWindow.addRectangle(brickRectangle);
@@ -59,15 +59,6 @@ public class Brick{
   }
   
 	/**
-	 * Moves the brick
-	 * @param xShift The x-shift of the brick
-	 */
-	public void move(int shift){
-		xPosition += shift;
-    updateSprite();
-	}
-
-	/**
 	 * Obtains the current height of the brick.
 	 * @return the height of the brick as int.
 	 */
@@ -75,6 +66,10 @@ public class Brick{
 		return brickHeight;
 	}
 	
+  /**
+  * Obtains the colour of this brick
+  * @return the colour of this brick
+  */
   public String getColour(){
     return colour;
   }

@@ -29,7 +29,8 @@ public class Ball{
 	}	
 
   /**
-  * Checks if a ball is colliding with a paddle
+  * Checks if a ball is colliding with a rectangle
+  * @param rec The rectangle this ball may be colliding with
   * @return true if ball is colliding with paddle, false if not
   */
   public boolean colliding(Rectangle rec){
@@ -120,9 +121,8 @@ public class Ball{
   }
   
   /**
-  * Checks for collisions with game arena walla and if true, resolves them
-  * @param windowWidth The width of the game arena
-  * @param windowHeight The height of the game arena
+  * Checks for collisions with GameArena walla and if true, resolves them
+  * @param ga The GameArena this ball is within.
   */
   public void resolveWallCollisions(GameArena ga){
     // collisions with right and left wall
@@ -175,16 +175,20 @@ public class Ball{
 	}
   
   /**
+  * Obtains the x position of this ball
   * legacy code required for gameArena class
   * do not build more dependancies upon this method
+  * @return The X position of the ball
   */
 	public double getXPosition(){
 		return position[0];
 	}
 	
   /**
+  * Obtains the Y positino of this ball
   * legacy code required for gameArena class
   * do not build more dependancies upon this method
+  * @return The Y position of this ball
   */
   public double getYPosition(){
 		return position[1];

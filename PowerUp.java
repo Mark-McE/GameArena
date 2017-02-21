@@ -26,6 +26,7 @@ public class PowerUp{
   
   /**
   * Obtains the active variable
+  * @return The active state of the power up.
   */
   public boolean getActive(){
     return active;
@@ -41,6 +42,7 @@ public class PowerUp{
   
   /**
   * Obtains the remaining time of this power up
+  * @return the remaining time of this power up
   */
   public int getTimer(){
     return timer;

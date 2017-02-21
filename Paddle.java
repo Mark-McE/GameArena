@@ -84,18 +84,18 @@ public class Paddle{
   }
   
 	/**
-	 * Inits the paddle in the given game arena
-	 * @param GameArena The game arena to add the paddle to
+	 * Adds the paddle in the given GameArena
+	 * @param gameWindow The GameArena to add the Paddle to
 	 */
 	public void addPaddle(GameArena gameWindow){
 		gameWindow.addRectangle(paddleRectangle);
 	}
   
 	/**
-	 * Moves the paddle
-	 * @param xShift The x-shift of the paddle
+	 * Moves the paddle in the X direction
+	 * @param xShift The number of pixels to move the paddle by
 	 */
-	public void move(int shift){
+	public void move(int xShift){
 		xPosition += shift;
     updateSprite();
 	}
