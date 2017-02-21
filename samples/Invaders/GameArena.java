@@ -215,8 +215,7 @@ public class GameArena
             {
                 Rectangle r = entry.getKey();
                 javafx.scene.shape.Rectangle rectangle = entry.getValue();
-                rectangle.setWidth(r.getWidth());
-                rectangle.setHeight(r.getHeight());
+
                 rectangle.setTranslateX(r.getXPosition() - r.getWidth()/2);
                 rectangle.setTranslateY(r.getYPosition() - r.getHeight()/2);
                 rectangle.setFill(getColourFromString(r.getColour()));

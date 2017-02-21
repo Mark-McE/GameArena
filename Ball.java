@@ -212,6 +212,15 @@ public class Ball{
 	}
 
 	/**
+	 * Sets the size of this Ball to the given value.
+     * @param size Teh new size of the Ball, in pixels.
+	 */
+	public void setSize(double size)
+	{
+		this.size = size;
+	}
+
+	/**
 	 * Obtains the colour of this Ball.
 	 * @return a textual description of the colour of this Ball.
 	 */
