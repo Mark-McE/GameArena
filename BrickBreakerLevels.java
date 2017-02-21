@@ -31,8 +31,8 @@ public class BrickBreakerLevels{
     
     for(int j=ga.getArenaHeight()/7,jCount=0; j<=ga.getArenaHeight()/2; j+=(brickHeight+10), jCount++ ){
       for (int i=brickWidth, iCount=0; i<ga.getArenaWidth()-brickWidth; i+=brickWidth, iCount++){
-        if( (jCount==5) && (iCount==4 || iCount==5) ){
-          bricks.add( new Brick( i, j, brickWidth, brickHeight, "Cyan" ) );
+        if( (jCount==8) && (iCount==3 || iCount==4) ){
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, "Red" ) );
         }
         else{
           bricks.add( new Brick( i, j, brickWidth, brickHeight, "white" ) );

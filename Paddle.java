@@ -65,6 +65,16 @@ public class Paddle{
     updateSprite();
 	}
 	
+  public void setWidth(int newWidth){
+    paddleWidth = newWidth;
+    updateSprite();
+  }
+  
+  public void setColour(String col){
+    colour = col;
+    updateSprite();
+  }
+  
 	/**
 	 * Inits the paddle in the given game arena
 	 * @param GameArena The game arena to add the paddle to

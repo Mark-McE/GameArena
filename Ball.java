@@ -218,4 +218,12 @@ public class Ball{
 	public String getColour(){
 		return colour;
 	}
+  
+  /**
+	 * Changes the current colour of this Ball
+	 * @param col the new colour of this Ball
+  */
+  public void setColour(String col){
+    colour = col;
+  }
 }

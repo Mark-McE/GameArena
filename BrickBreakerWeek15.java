@@ -7,10 +7,39 @@ import java.util.*;
 **/
 public class BrickBreakerWeek15{
   
-  private static void updatePowers(boolean[] powers, Brick b){
+  private static void updatePowerUpTimers(PowerUp[] powers, Ball ball, Paddle paddle){
+    for(int i =0; i<powers.length; i++){
+      if(powers[i].getActive()){
+        powers[i].timerTick();
+        if(powers[i].getTimer()<=0){
+          powers[i].setActive(false);
+          ball.setColour("yellow");
+          paddle.setColour("Cyan");
+          paddle.setWidth(200);
+        }
+      }
+    }
+  }
+  
+  private static void addPowers(PowerUp[] powers, Brick b, Ball ball, Paddle paddle){
     for(int i=0; i<powers.length; i++){
       if(b.getColour().equals(b.powers[i][1])){
-        powers[i]=true;
+        powers[i].setActive(true);
+        powers[i].setTimer(10);
+        
+        switch(i){
+          case 0:
+            paddle.setColour(b.getColour());
+            paddle.setWidth(140);
+            break;
+            
+          case 1:
+            ball.setColour(b.getColour());
+            break;
+            
+          default:
+            break;
+        }
       }
     }
   }
@@ -21,18 +50,18 @@ public class BrickBreakerWeek15{
     int windowLength = 500;
     int frames = 10;
     
-    boolean[] currentPowers = new boolean[Brick.powers.length];
+    PowerUp[] currentPowers = new PowerUp[Brick.powers.length];
     for(int i=0; i<currentPowers.length; i++){
-      currentPowers[i] = false;
+      currentPowers[i] = new PowerUp(false,0);
     }
     
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 70, "cyan");
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 200, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
-    Ball ball = new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow");
-    gameWindow.addBall(ball);
+    Ball playerBall = new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow");
+    gameWindow.addBall(playerBall);
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
@@ -40,22 +69,23 @@ public class BrickBreakerWeek15{
     
     for(int i=0;;i++){
       // ball-paddle collisions
-      if( ball.colliding( playerPaddle.getRectangle() ) ){
-        ball.resolvePaddleCollision(playerPaddle);
+      if( playerBall.colliding( playerPaddle.getRectangle() ) ){
+        playerBall.resolvePaddleCollision(playerPaddle);
       }
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
-        if(ball.colliding( bricks.get(b).getRectangle() ) ){
-          if(!currentPowers[1])
-            ball.resolveCollision(bricks.get(b).getRectangle());
-          updatePowers(currentPowers,bricks.get(b));
+        if(playerBall.colliding( bricks.get(b).getRectangle() ) ){
+          if(!(currentPowers[1].getActive())) // cyan power-up removes collissions
+            playerBall.resolveCollision(bricks.get(b).getRectangle());
+          addPowers(currentPowers,bricks.get(b),playerBall,playerPaddle);
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
         }
       }
       // ball-wall collisions
-      ball.resolveWallCollisions(gameWindow);
+      playerBall.resolveWallCollisions(gameWindow);
       
+      // executes every frame
       if(i%frames==0){
         // player controls
         if(gameWindow.rightPressed()){
@@ -65,9 +95,14 @@ public class BrickBreakerWeek15{
           playerPaddle.move(-7);
         }
         
+        // executes roughly every second
+        if(i%(frames*60)==0){
+          updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
+        }
+        
         gameWindow.pause();
       }
-      ball.updatePosFraction(frames);
+      playerBall.updatePosFraction(frames);
     }
   }
 }
