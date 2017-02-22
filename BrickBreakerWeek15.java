@@ -17,9 +17,20 @@ public class BrickBreakerWeek15{
         powers[i].timerTick();
         if(powers[i].getTimer()<=0){
           powers[i].setActive(false);
-          ball.setColour("yellow");
-          paddle.setColour("Cyan");
-          paddle.setWidth(70);
+          
+          switch(i){
+          case 0:
+            paddle.setColour("Cyan");
+            paddle.setWidth(70);
+            break;
+            
+          case 1:
+            ball.setColour("Yellow");
+            break;
+            
+          default:
+            break;
+          }
         }
       }
     }

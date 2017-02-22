@@ -50,8 +50,37 @@ public class BrickBreakerLevels{
     //bricks.add( new Brick( /**/ ) );
   }
   
-  private void level_win(GameArena g){
-    //bricks.add( new Brick( /**/ ) );
+  private void level_win(GameArena ga){
+    //******level layout********
+    //**********15x12***********
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**■■■■■■■■■■■■■■■■■■■■■■**
+    //**************************
+    //**************************
+    //************o*************
+    //**********----************
+    
+    int brickWidth = 29;
+    int brickHeight = 20;
+    
+    for(int j=ga.getArenaHeight()/7,jCount=0; j<=ga.getArenaHeight()/2; j+=(brickHeight), jCount++ ){
+      for (int i=brickWidth, iCount=0; i<ga.getArenaWidth()-brickWidth; i+=brickWidth, iCount++){
+        if( (jCount==11) && (iCount==5 || iCount==10 || iCount==15) )
+        {
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, "Red" ) );
+        }
+        else{
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, "white" ) );
+        }
+      }
+    }
   }
   
   private void level_lose(GameArena ga){
@@ -68,6 +97,10 @@ public class BrickBreakerLevels{
     boolean validLevel;
     
     switch (level){
+      case -1: level_lose(gameWindow); validLevel = true;
+        break;
+      case 0: level_win(gameWindow); validLevel = true;
+        break;
       case 1: level_1(gameWindow); validLevel = true;
         break;
       case 2: level_2(gameWindow); validLevel = true;

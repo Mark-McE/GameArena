@@ -96,7 +96,7 @@ public class Paddle{
 	 * @param xShift The number of pixels to move the paddle by
 	 */
 	public void move(int xShift){
-		xPosition += shift;
+		xPosition += xShift;
     updateSprite();
 	}
 }
