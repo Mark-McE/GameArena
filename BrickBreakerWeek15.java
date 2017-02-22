@@ -116,6 +116,7 @@ public class BrickBreakerWeek15{
         // executes roughly every second
         if(i%(frames*60)==0){
           updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
+		  i=0;
         }
         
         gameWindow.pause();
