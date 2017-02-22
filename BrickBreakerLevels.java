@@ -47,7 +47,21 @@ public class BrickBreakerLevels{
   }
   
   private void level_2(GameArena ga){
-    //bricks.add( new Brick( /**/ ) );
+    
+    int brickWidth = 45;
+    int brickHeight = 20;
+    
+    for(int j=brickHeight/2,jCount=0; j<=ga.getArenaHeight()*3/4; j+=(brickHeight+1), jCount++ ){
+      for (int i=brickWidth/2, iCount=0; i<ga.getArenaWidth(); i+=brickWidth, iCount++){
+        if( (jCount==5 || jCount==10 || jCount== 15) && (iCount==5 || iCount==10) ){
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, "Red" ) );
+        }
+        else{
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, "white" ) );
+        }
+      }
+    }
+    
   }
   
   private void level_win(GameArena ga){

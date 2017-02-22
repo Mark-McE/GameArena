@@ -55,6 +55,10 @@ public class BrickBreakerWeek15{
             ball.setColour(b.getColour());
             break;
             
+          case 2:
+            ball.setColour(b.getColour());
+            break;
+            
           default:
             break;
         }
@@ -65,7 +69,7 @@ public class BrickBreakerWeek15{
   public static void main( String[] args ){
     
     int windowHeight = 700;
-    int windowLength = 500;
+    int windowLength = 495;
     int frames = 10;
     
     PowerUp[] currentPowers = new PowerUp[Brick.powers.length];
@@ -83,7 +87,7 @@ public class BrickBreakerWeek15{
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
-    levels.load(1, gameWindow);
+    levels.load(2, gameWindow);
     
     for(int i=0;;i++){
       // ball-paddle collisions
@@ -116,7 +120,7 @@ public class BrickBreakerWeek15{
         // executes roughly every second
         if(i%(frames*60)==0){
           updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
-		  i=0;
+          i=0;
         }
         
         gameWindow.pause();
