@@ -1,5 +1,7 @@
 import java.util.*;
 import java.lang.Math;
+import java.io.FileReader;
+import java.io.BufferedReader;
 /**
 * Stores all levels of the brick breaker game.
 * With methods to load the levels into an arrayList of Bricks, and add them to the GameArena
@@ -48,16 +50,31 @@ public class BrickBreakerLevels{
   
   private void level_2(GameArena ga){
     
+    String[][] levelInput = new String[24][10];
+    String line = "";
     int brickWidth = 45;
     int brickHeight = 20;
     
-    for(int j=brickHeight/2,jCount=0; j<=ga.getArenaHeight()*3/4; j+=(brickHeight+1), jCount++ ){
-      for (int i=brickWidth/2, iCount=0; i<ga.getArenaWidth(); i+=brickWidth, iCount++){
-        if( (jCount==5 || jCount==10 || jCount== 15) && (iCount==5 || iCount==10) ){
-          bricks.add( new Brick( i, j, brickWidth, brickHeight, "Red" ) );
-        }
-        else{
-          bricks.add( new Brick( i, j, brickWidth, brickHeight, "white" ) );
+    try{
+      BufferedReader levelFile = new BufferedReader(new FileReader("level1.csv"));
+      int k = 0;
+      System.out.println("Loading file....");
+      while((line = levelFile.readLine()) != null){
+        levelInput[k] = line.split(",");
+        k++;
+      }
+      levelFile.close();
+      System.out.println("File loaded");
+    }catch(java.io.IOException ex){
+      System.out.println("Failed to load file!");
+    }
+    
+    
+    
+    for(int j=brickHeight/2,jCount=0; jCount<=23; j+=(brickHeight+1), jCount++ ){
+      for (int i=brickWidth/2, iCount=0; iCount<=10; i+=brickWidth, iCount++){
+        if(!(levelInput[jCount][iCount].equals("0"))){
+          bricks.add( new Brick( i, j, brickWidth, brickHeight, levelInput[jCount][iCount] ) );
         }
       }
     }
