@@ -10,7 +10,8 @@ public class Brick{
 	private String colour = "White"; 
 	private Rectangle brickRectangle = new Rectangle(xPosition, yPosition, brickWidth, brickHeight, colour);
   
-  public static String[][] powers = {{"bigPaddle", "Red"},{"noCollide","Cyan"},{"slowBall","Brown"}};
+  public static String[] powers = {"#FF0000","#00FFFF","#A52A2A"};
+  //   powers in order   big paddle-red,  no collide-cyan,  slow ball-brown
     
 	/**
   * Basic Constructor

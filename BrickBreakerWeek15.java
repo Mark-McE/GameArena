@@ -28,6 +28,11 @@ public class BrickBreakerWeek15{
             ball.setColour("Yellow");
             break;
             
+          case 2:
+            ball.setColour("Yellow");           
+            ball.setVelocity( new double []{ball.getVelocity()[0] , ball.getVelocity()[1]*2} );
+            break;
+            
           default:
             break;
           }
@@ -41,26 +46,29 @@ public class BrickBreakerWeek15{
   */
   private static void addPowers(PowerUp[] powers, Brick b, Ball ball, Paddle paddle){
     for(int i=0; i<powers.length; i++){
-      if(b.getColour().equals(b.powers[i][1])){
-        powers[i].setActive(true);
+      if(b.getColour().equals(b.powers[i])){
         powers[i].setTimer(10);
-        
-        switch(i){
-          case 0:
-            paddle.setColour(b.getColour());
-            paddle.setWidth(140);
-            break;
-            
-          case 1:
-            ball.setColour(b.getColour());
-            break;
-            
-          case 2:
-            ball.setColour(b.getColour());
-            break;
-            
-          default:
-            break;
+        if(!powers[i].getActive()){
+          powers[i].setActive(true);
+          
+          switch(i){
+            case 0:
+              paddle.setColour(b.getColour());
+              paddle.setWidth(140);
+              break;
+              
+            case 1:
+              ball.setColour(b.getColour());
+              break;
+              
+            case 2:
+              ball.setColour(b.getColour());
+              ball.setVelocity( new double[]{ball.getVelocity()[0],ball.getVelocity()[1]/2} );
+              break;
+              
+            default:
+              break;
+          }
         }
       }
     }
@@ -87,7 +95,7 @@ public class BrickBreakerWeek15{
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
-    levels.load(2, gameWindow);
+    levels.load(1, gameWindow);
     
     for(int i=0;;i++){
       // ball-paddle collisions
