@@ -83,19 +83,6 @@ public class GameArena
 	 */
 	public GameArena(int width, int height)
 	{   
-        this(width, height, true);
-    }
-
-	/**
-     * Constructor. Creates an instance of the GameArena class, and displays a window on the
-     * screen upon which shapes can be drawn.
-     *
-     * @param width The width of the window, in pixels.
-     * @param height The height of the window, in pixels.
-     * @param createWindow Determines if a JFrame containing the GameArena should be created (true) or not (false).
-	 */
-	public GameArena(int width, int height, boolean createWindow)
-	{   
         this.arenaWidth = width;
         this.arenaHeight = height;
         this.objectCount = 0;
@@ -103,21 +90,19 @@ public class GameArena
         // Create a lock to reduce flicker on rendering
         renderLock = new ReentrantLock();
 
+        // Create a window
+        window = new JFrame();
+        window.setTitle("Let's Play!");
+
         // Create a JavaFX canvas as a Swing panel.
         jfxPanel = new JFXPanel();
         jfxPanel.setPreferredSize(new java.awt.Dimension(width, height));
 
-        // Create a window, if necessary.
-        if (createWindow)
-        {
-            window = new JFrame();
-            window.setTitle("Let's Play!");
-            window.setContentPane(jfxPanel);
-            window.setResizable(false);
-            window.pack();
-            window.setVisible(true);
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        }
+        window.setContentPane(jfxPanel);
+        window.setResizable(false);
+        window.pack();
+        window.setVisible(true);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         root = new Group();
         scene = new Scene(root, arenaWidth, arenaHeight, Color.BLACK);
@@ -432,13 +417,4 @@ public class GameArena
 	{
 		return right;
 	}
-
-    /** 
-     * Acquires the JPanel containing this GameArena.
-     * @return The JPanel object containing this GameArena.
-     */
-    public JFXPanel getPanel()
-    {
-        return jfxPanel;
-    }
 }
