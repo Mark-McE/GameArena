@@ -8,6 +8,8 @@ import java.util.*;
 public class BrickBreakerWeek15{
   
   public static final int defaultPaddleWidth = 100;
+  public static final int windowHeight = 700;
+  public static final int windowLength = 495;
   
   /**
   * Adds one second to the timer varaible for all active powerUp classes.
@@ -78,8 +80,6 @@ public class BrickBreakerWeek15{
   
   public static void main( String[] args ){
     
-    int windowHeight = 700;
-    int windowLength = 495;
     int frames = 10;
     int currentLevel = 0;
     int lastLevel = 2;
