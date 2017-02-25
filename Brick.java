@@ -9,10 +9,7 @@ public class Brick{
 	private int brickHeight = 10;
 	private String colour = "White"; 
 	private Rectangle brickRectangle = new Rectangle(xPosition, yPosition, brickWidth, brickHeight, colour);
-  
-  public static String[] powers = {"#FF0000","#00FFFF","#A52A2A"};
-  //   powers in order   big paddle-red,  no collide-cyan,  slow ball-brown
-    
+
 	/**
   * Basic Constructor
   * @param xPos The starting X position for the brick

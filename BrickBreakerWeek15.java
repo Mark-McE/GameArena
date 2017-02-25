@@ -7,6 +7,8 @@ import java.util.*;
 **/
 public class BrickBreakerWeek15{
   
+  public static final int defaultPaddleWidth = 100;
+  
   /**
   * Adds one second to the timer varaible for all active powerUp classes.
   * Will set PowerUp.active to false if timer is reduced to 0.
@@ -21,7 +23,7 @@ public class BrickBreakerWeek15{
           switch(i){
           case 0:
             paddle.setColour("Cyan");
-            paddle.setWidth(70);
+            paddle.setWidth(defaultPaddleWidth);
             break;
             
           case 1:
@@ -46,7 +48,7 @@ public class BrickBreakerWeek15{
   */
   private static void addPowers(PowerUp[] powers, Brick b, Ball ball, Paddle paddle){
     for(int i=0; i<powers.length; i++){
-      if(b.getColour().equals(b.powers[i])){
+      if(b.getColour().equals(PowerUp.powers[i])){
         powers[i].setTimer(10);
         if(!powers[i].getActive()){
           powers[i].setActive(true);
@@ -79,15 +81,17 @@ public class BrickBreakerWeek15{
     int windowHeight = 700;
     int windowLength = 495;
     int frames = 10;
+    int currentLevel = 0;
+    int lastLevel = 2;
     
-    PowerUp[] currentPowers = new PowerUp[Brick.powers.length];
+    PowerUp[] currentPowers = new PowerUp[PowerUp.powers.length];
     for(int i=0; i<currentPowers.length; i++){
       currentPowers[i] = new PowerUp(false,0);
     }
     
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, 70, "cyan");
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
     Ball playerBall = new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow");
@@ -95,7 +99,6 @@ public class BrickBreakerWeek15{
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
-    levels.load(1, gameWindow);
     
     for(int i=0;;i++){
       // ball-paddle collisions
@@ -129,6 +132,18 @@ public class BrickBreakerWeek15{
         if(i%(frames*60)==0){
           updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
           i=0;
+        }
+        
+        //check for win/new levels
+        if(bricks.size() == 0){
+          currentLevel++;
+          if(currentLevel>lastLevel)
+            currentLevel=0;
+          
+          for(int wait=0; wait<(50*0.2); wait++)
+            gameWindow.pause();
+          
+          levels.load(currentLevel, gameWindow);
         }
         
         gameWindow.pause();
