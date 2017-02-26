@@ -52,7 +52,7 @@ public class BrickBreakerWeek15{
     for(int i=0; i<powers.length; i++){
       if(b.getColour().equals(PowerUp.powers[i])){
         powers[i].setTimer(10);
-        if(!powers[i].getActive()){
+        if(powers[i].getActive() == false){
           powers[i].setActive(true);
           
           switch(i){
