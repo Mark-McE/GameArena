@@ -94,29 +94,30 @@ public class BrickBreakerWeek15{
     Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
-    Ball playerBall = new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow");
-    gameWindow.addBall(playerBall);
+    List<Ball> balls = new ArrayList<Ball>();
+    balls.add(new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow"));
+    gameWindow.addBall(balls.get(0));
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
     
     for(int i=0;;i++){
       // ball-paddle collisions
-      if( playerBall.colliding( playerPaddle.getRectangle() ) ){
-        playerBall.resolvePaddleCollision(playerPaddle);
+      if( balls.get(0).colliding( playerPaddle.getRectangle() ) ){
+        balls.get(0).resolvePaddleCollision(playerPaddle);
       }
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
-        if(playerBall.colliding( bricks.get(b).getRectangle() ) ){
+        if(balls.get(0).colliding( bricks.get(b).getRectangle() ) ){
           if(!(currentPowers[1].getActive())) // cyan power-up removes collissions
-            playerBall.resolveCollision(bricks.get(b).getRectangle());
-          addPowers(currentPowers,bricks.get(b),playerBall,playerPaddle);
+            balls.get(0).resolveCollision(bricks.get(b).getRectangle());
+          addPowers(currentPowers,bricks.get(b),balls.get(0),playerPaddle);
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
         }
       }
       // ball-wall collisions
-      playerBall.resolveWallCollisions(gameWindow);
+      balls.get(0).resolveWallCollisions(gameWindow);
       
       // executes every frame
       if(i%frames==0){
@@ -130,7 +131,7 @@ public class BrickBreakerWeek15{
         
         // executes roughly every second
         if(i%(frames*60)==0){
-          updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
+          updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
           i=0;
         }
         
@@ -148,7 +149,7 @@ public class BrickBreakerWeek15{
         
         gameWindow.pause();
       }
-      playerBall.updatePosFraction(frames);
+      balls.get(0).updatePosFraction(frames);
     }
   }
 }
