@@ -8,6 +8,7 @@ import java.util.*;
 public class BrickBreakerWeek15{
   
   public static final int defaultPaddleWidth = 100;
+  public static int paddleMoveSpeed = 7;
   public static final int windowHeight = 700;
   public static final int windowLength = 495;
   
@@ -123,10 +124,10 @@ public class BrickBreakerWeek15{
       if(i%frames==0){
         // player controls
         if(gameWindow.rightPressed()){
-          playerPaddle.move(7);
+          playerPaddle.move(paddleMoveSpeed);
         }
         if(gameWindow.leftPressed()){
-          playerPaddle.move(-7);
+          playerPaddle.move(-1*paddleMoveSpeed);
         }
         
         // executes roughly every second
