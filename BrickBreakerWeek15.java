@@ -95,7 +95,7 @@ public class BrickBreakerWeek15{
     Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, "cyan");
     playerPaddle.addPaddle(gameWindow);
     
-    List<Ball> balls = new ArrayList<Ball>();
+    List<Ball> balls = new ArrayList<Ball>(); // Intend on adding multiball power up later.
     balls.add(new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow"));
     gameWindow.addBall(balls.get(0));
     
@@ -110,7 +110,7 @@ public class BrickBreakerWeek15{
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
         if(balls.get(0).colliding( bricks.get(b).getRectangle() ) ){
-          if(!(currentPowers[1].getActive())) // cyan power-up removes collissions
+          if((currentPowers[1].getActive()) == false) // cyan power-up removes collissions
             balls.get(0).resolveCollision(bricks.get(b).getRectangle());
           addPowers(currentPowers,bricks.get(b),balls.get(0),playerPaddle);
           bricks.get(b).remove(gameWindow);
@@ -133,7 +133,7 @@ public class BrickBreakerWeek15{
         // executes roughly every second
         if(i%(frames*60)==0){
           updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
-          i=0;
+          i=0; // resets i to 0 to prevent int overflow
         }
         
         //check for win/new levels
