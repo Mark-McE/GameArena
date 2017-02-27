@@ -80,7 +80,7 @@ public class BrickBreakerWeek15{
   
   public static void main( String[] args ){
     
-    int frames = 10;
+    int frames = 10; // number of game loop executions before .pause() is called
     int currentLevel = 0;
     int lastLevel = 2;
     int paddleMoveSpeed = 7;
