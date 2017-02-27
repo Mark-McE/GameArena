@@ -10,6 +10,8 @@ public class BrickBreakerWeek15{
   public static final int defaultPaddleWidth = 100;
   public static final int windowHeight = 700;
   public static final int windowLength = 495;
+  public static final String defaultPaddleColour = "White";
+  public static final String defaultBallColour = "White";
   
   /**
   * Adds one second to the timer varaible for all active powerUp classes.
@@ -24,16 +26,16 @@ public class BrickBreakerWeek15{
           
           switch(i){
           case 0:
-            paddle.setColour("Cyan");
+            paddle.setColour(defaultPaddleColour);
             paddle.setWidth(defaultPaddleWidth);
             break;
             
           case 1:
-            ball.setColour("Yellow");
+            ball.setColour(defaultBallColour);
             break;
             
           case 2:
-            ball.setColour("Yellow");           
+            ball.setColour(defaultBallColour);           
             ball.setVelocity( new double []{ball.getVelocity()[0] , ball.getVelocity()[1]*2} );
             break;
             
@@ -80,7 +82,7 @@ public class BrickBreakerWeek15{
   
   public static void main( String[] args ){
     
-    int frames = 10; // number of game loop executions before .pause() is called
+    final int frames = 10; // number of game loop executions before .pause() is called
     int currentLevel = 0;
     int lastLevel = 2;
     int paddleMoveSpeed = 7;
@@ -92,11 +94,11 @@ public class BrickBreakerWeek15{
     
     GameArena gameWindow = new GameArena(windowLength,windowHeight);
     
-    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, "cyan");
+    Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, defaultPaddleColour);
     playerPaddle.addPaddle(gameWindow);
     
     List<Ball> balls = new ArrayList<Ball>(); // Intend on adding multiball power up later.
-    balls.add(new Ball(windowLength/4,windowHeight-35,1,0,10,"yellow"));
+    balls.add(new Ball(windowLength/4,windowHeight-35,1,0,10,defaultBallColour));
     gameWindow.addBall(balls.get(0));
     
     List<Brick> bricks = new ArrayList<Brick>();
@@ -120,7 +122,7 @@ public class BrickBreakerWeek15{
       // ball-wall collisions
       balls.get(0).resolveWallCollisions(gameWindow);
       
-      // executes every frame
+      // executes every time .pause() is called
       if(i%frames==0){
         // player controls
         if(gameWindow.rightPressed()){
@@ -130,22 +132,36 @@ public class BrickBreakerWeek15{
           playerPaddle.move(-1*paddleMoveSpeed);
         }
         
-        // executes roughly every second
-        if(i%(frames*60)==0){
-          updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
-          i=0; // resets i to 0 to prevent int overflow
-        }
-        
         //check for win/new levels
         if(bricks.size() == 0){
+          if(currentLevel == -1){
+            playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
+            balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
+            balls.get(0).setVelocity(new double[]{1,0});
+            levels.load(currentLevel, gameWindow);
+          }
           currentLevel++;
           if(currentLevel>lastLevel)
             currentLevel=0;
           
-          for(int wait=0; wait<(50*0.2); wait++)
-            gameWindow.pause();
-          
+            playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
+            balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
+            balls.get(0).setVelocity(new double[]{1,0});
+            levels.load(currentLevel, gameWindow);
+        }
+        // check for game over
+        if(balls.get(0).getYPosition()>windowHeight){
+          currentLevel = -1; // game over screen
+          playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
+          balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
+          balls.get(0).setVelocity(new double[]{1,0});
           levels.load(currentLevel, gameWindow);
+        }
+        
+        // executes roughly every second
+        if(i%(frames*60)==0){
+          updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+          i=0; // resets i to 0 to prevent int overflow
         }
         
         gameWindow.pause();

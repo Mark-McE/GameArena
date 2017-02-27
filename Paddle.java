@@ -83,6 +83,16 @@ public class Paddle{
     updateSprite();
   }
   
+   /**
+	 * Moves the current position of this Paddle to the given co-ordinates
+	 * @param pos the new position vector of this Ball
+	 */
+	public void setPosition(int[] pos){
+		xPosition = pos[0];
+		yPosition = pos[1];
+    updateSprite();
+	}
+  
 	/**
 	 * Adds the paddle in the given GameArena
 	 * @param gameWindow The GameArena to add the Paddle to

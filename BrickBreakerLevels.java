@@ -28,8 +28,8 @@ public class BrickBreakerLevels{
     String levelFileName = "";
     String[][] levelInput = new String[24][10];
     String line = "";
-    int brickWidth = 45;
-    int brickHeight = 20;
+    final int brickWidth = 45;
+    final int brickHeight = 20;
     try{
       switch (level){
         case -1: levelFileName = "levelLose.csv";
@@ -54,10 +54,18 @@ public class BrickBreakerLevels{
       System.out.println("Failed to load file!");
     }
     
-    for(int j=brickHeight/2,jCount=0; jCount<=23; j+=(brickHeight+1), jCount++ ){
-      for (int i=brickWidth/2, iCount=0; iCount<=10; i+=brickWidth, iCount++){
-        if(!(levelInput[jCount][iCount].equals("0"))){
-          bricks.add( new Brick( i, j, brickWidth, brickHeight, levelInput[jCount][iCount] ) );
+    //remove any curently existing bricks
+    while(bricks.size()>0){
+      bricks.get(0).remove(gameWindow);
+      bricks.remove(bricks.get(0));
+    }
+    
+    // the following nested loops were tuned according to a set grid of bricks, 
+    // please do not edit this, use the csv files to edit levels
+    for(int y=brickHeight/2, j=0; j<=23; y+=(brickHeight+1), j++ ){
+      for (int x=brickWidth/2, i=0; i<=10; x+=brickWidth, i++){
+        if((levelInput[j][i].equals("0")) == false){
+          bricks.add( new Brick( x, y, brickWidth, brickHeight, levelInput[j][i] ) );
         }
       }
     }
