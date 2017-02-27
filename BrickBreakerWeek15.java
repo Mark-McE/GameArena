@@ -11,8 +11,6 @@ public class BrickBreakerWeek15{
   public static final int windowHeight = 700;
   public static final int windowLength = 495;
   
-  private static int paddleMoveSpeed = 7;
-  
   /**
   * Adds one second to the timer varaible for all active powerUp classes.
   * Will set PowerUp.active to false if timer is reduced to 0.
@@ -85,6 +83,7 @@ public class BrickBreakerWeek15{
     int frames = 10;
     int currentLevel = 0;
     int lastLevel = 2;
+    int paddleMoveSpeed = 7;
     
     PowerUp[] currentPowers = new PowerUp[PowerUp.powers.length];
     for(int i=0; i<currentPowers.length; i++){
