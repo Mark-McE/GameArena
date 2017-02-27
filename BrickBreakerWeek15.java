@@ -140,14 +140,16 @@ public class BrickBreakerWeek15{
             balls.get(0).setVelocity(new double[]{1,0});
             levels.load(currentLevel, gameWindow);
           }
-          currentLevel++;
-          if(currentLevel>lastLevel)
-            currentLevel=0;
-          
-            playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
-            balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
-            balls.get(0).setVelocity(new double[]{1,0});
-            levels.load(currentLevel, gameWindow);
+          else{
+            currentLevel++;
+            if(currentLevel>lastLevel)
+              currentLevel=0;
+            
+              playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
+              balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
+              balls.get(0).setVelocity(new double[]{1,0});
+              levels.load(currentLevel, gameWindow);
+          }
         }
         // check for game over
         if(balls.get(0).getYPosition()>windowHeight){
