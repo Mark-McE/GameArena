@@ -104,24 +104,23 @@ public class BrickBreak{
     Paddle playerPaddle = new Paddle(windowLength/2, windowHeight-30, defaultPaddleWidth, defaultPaddleColour);
     playerPaddle.addPaddle(gameWindow);
     
-    List<Ball> balls = new ArrayList<Ball>(); // Intend on adding multiball power up later.
-    balls.add(new Ball(windowLength/4,windowHeight-35,1,0,10,defaultBallColour));
-    gameWindow.addBall(balls.get(0));
+    Ball playerBall = new Ball(windowLength/4,windowHeight-35,1,0,10,defaultBallColour);
+    gameWindow.addBall(playerBall);
     
     List<Brick> bricks = new ArrayList<Brick>();
     BrickBreakerLevels levels = new BrickBreakerLevels(bricks);
     
     for(int i=0;;i++){
       // ball-paddle collisions
-      if( balls.get(0).colliding( playerPaddle.getRectangle() )){
-        balls.get(0).resolvePaddleCollision(playerPaddle);
+      if( playerBall.colliding( playerPaddle.getRectangle() )){
+        playerBall.resolvePaddleCollision(playerPaddle);
       }
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
-        if(balls.get(0).colliding( bricks.get(b).getRectangle() )){
+        if(playerBall.colliding( bricks.get(b).getRectangle() )){
           if((currentPowers[1].getActive()) == false) // cyan power-up removes collissions
-            balls.get(0).resolveCollision(bricks.get(b).getRectangle());
-          addPowers(currentPowers,bricks.get(b),balls.get(0),playerPaddle);
+            playerBall.resolveCollision(bricks.get(b).getRectangle());
+          addPowers(currentPowers,bricks.get(b),playerBall,playerPaddle);
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
           if(currentLevel != -1)
@@ -129,7 +128,7 @@ public class BrickBreak{
         }
       }
       // ball-wall collisions
-      balls.get(0).resolveWallCollisions(gameWindow);
+      playerBall.resolveWallCollisions(gameWindow);
       
       // executes once every time .pause() is called
       if(i%frames==0){
@@ -144,11 +143,11 @@ public class BrickBreak{
         //check for win/new levels
         if(bricks.size() == 0){
           playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
-          balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
-          balls.get(0).setVelocity(new double[]{1,0});
+          playerBall.setPosition(new double[]{windowLength/4,windowHeight-35});
+          playerBall.setVelocity(new double[]{1,0});
           // ticks down all power ups on new level
           for(int j=0;j<10;j++){
-            updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+            updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
           }
           // if in the you lose screen, just re-load the you lose screen
           if(currentLevel == -1){
@@ -163,22 +162,22 @@ public class BrickBreak{
           System.out.println("Current Score: " +score);
         }
         // check for player lose
-        if(balls.get(0).getYPosition()>windowHeight){
+        if(playerBall.getYPosition()>windowHeight){
           currentLevel = -1; // the you lose screen
           // ticks down all power ups on new level
           for(int j=0;j<10;j++){
-            updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+            updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
           }
           playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
-          balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
-          balls.get(0).setVelocity(new double[]{1,0});
+          playerBall.setPosition(new double[]{windowLength/4,windowHeight-35});
+          playerBall.setVelocity(new double[]{1,0});
           levels.load(currentLevel, gameWindow);
           System.out.println("final Score: " +score);
         }
         
         // executes roughly every second
         if(i%(frames*50)==0){
-          updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+          updatePowerUpTimers(currentPowers, playerBall, playerPaddle);
           i=0; // resets i to 0 to prevent int overflow
         }
         
@@ -187,7 +186,7 @@ public class BrickBreak{
       // updates the position of the ball by a fraction of it's speed.
       // intended to execute multiple times before .pause() is called
       // for collission detection accuracy
-      balls.get(0).updatePosFraction(frames);
+      playerBall.updatePosFraction(frames);
     }
   }
 }
