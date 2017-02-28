@@ -84,7 +84,7 @@ public class BrickBreakerWeek15{
     
     final int frames = 10; // number of game loop executions before .pause() is called
     int currentLevel = 0;
-    int lastLevel = 2;
+    int lastLevel = 3;
     int paddleMoveSpeed = 7;
     
     PowerUp[] currentPowers = new PowerUp[PowerUp.powers.length];

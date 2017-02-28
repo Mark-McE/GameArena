@@ -40,6 +40,8 @@ public class BrickBreakerLevels{
           break;
         case 2: levelFileName = "level2.csv";
           break;
+        case 3: levelFileName = "level3.csv";
+          break;
         default: 
           System.out.println("Invalid level loaded"); System.exit(0);
       }

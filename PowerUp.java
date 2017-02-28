@@ -8,8 +8,8 @@ public class PowerUp{
   private int timer; // time for power up measured in seconds
   
   // colours for power ups
-  public static String[] powers = {"#FF0000","#00FFFF","#A52A2A"};
-  //   powers in order   big paddle-red,  no collide-cyan,  slow ball-brown
+  public static String[] powers = {"#FF0000","#ffff00","#A52A2A"};
+  //   powers in order   big paddle-red,  no collide-yellow,  slow ball-brown
     
   /**
   * basic constructor
