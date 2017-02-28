@@ -134,26 +134,30 @@ public class BrickBreakerWeek15{
         
         //check for win/new levels
         if(bricks.size() == 0){
+          playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
+          balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
+          balls.get(0).setVelocity(new double[]{1,0});
+          // ticks down all power ups on new level
+          for(int j=0;j<10;j++){
+            updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+          }
           if(currentLevel == -1){
-            playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
-            balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
-            balls.get(0).setVelocity(new double[]{1,0});
             levels.load(currentLevel, gameWindow);
           }
           else{
             currentLevel++;
             if(currentLevel>lastLevel)
               currentLevel=0;
-            
-              playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
-              balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
-              balls.get(0).setVelocity(new double[]{1,0});
-              levels.load(currentLevel, gameWindow);
+            levels.load(currentLevel, gameWindow);
           }
         }
         // check for game over
         if(balls.get(0).getYPosition()>windowHeight){
           currentLevel = -1; // game over screen
+          // ticks down all power ups on new level
+          for(int j=0;j<10;j++){
+            updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
+          }
           playerPaddle.setPosition(new int[]{windowLength/2, windowHeight-30} );
           balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
           balls.get(0).setVelocity(new double[]{1,0});
