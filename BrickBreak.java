@@ -1,6 +1,8 @@
 import java.util.*;
 /**
 * Driver class to represent a brick breaker type game.
+* Power ups for the player are gained when breaking a brick
+* of a certain colour.
 * 
 * @author Mark McElroy
 * @author Chris Bartzis
@@ -25,16 +27,16 @@ public class BrickBreak{
           powers[i].setActive(false);
           
           switch(i){
-          case 0:
+          case 0: // big paddle power up
             paddle.setColour(defaultPaddleColour);
             paddle.setWidth(defaultPaddleWidth);
             break;
             
-          case 1:
+          case 1: // no collide power up
             ball.setColour(defaultBallColour);
             break;
             
-          case 2:
+          case 2: // slow ball power up
             ball.setColour(defaultBallColour);           
             ball.setVelocity( new double []{ball.getVelocity()[0] , ball.getVelocity()[1]*2} );
             break;
@@ -50,29 +52,29 @@ public class BrickBreak{
   /**
   * Activates power ups if the currently hit brick contains a power up.
   */
-  private static void addPowers(PowerUp[] powers, Brick b, Ball ball, Paddle paddle){
+  private static void addPowers(PowerUp[] powers, Brick brick, Ball ball, Paddle paddle){
     for(int i=0; i<powers.length; i++){
-      if(b.getColour().equals(PowerUp.powers[i])){
-        powers[i].setTimer(10);
-        if(powers[i].getActive() == false){
+      if(brick.getColour().equals(PowerUp.powers[i])){
+        powers[i].setTimer(10); // set power up to stay active for 10 seconds
+        if(powers[i].getActive() == false){ // if the power up wasn't already active then..
           powers[i].setActive(true);
           
           System.out.print("POWER UP: ");
           switch(i){
             case 0:
               System.out.println("large paddle!");
-              paddle.setColour(b.getColour());
-              paddle.setWidth(140);
+              paddle.setColour(brick.getColour());
+              paddle.setWidth(defaultPaddleWidth+40);
               break;
               
             case 1:
               System.out.println("no collide!");
-              ball.setColour(b.getColour());
+              ball.setColour(brick.getColour());
               break;
               
             case 2:
               System.out.println("slow ball!");
-              ball.setColour(b.getColour());
+              ball.setColour(brick.getColour());
               ball.setVelocity( new double[]{ball.getVelocity()[0],ball.getVelocity()[1]/2} );
               break;
               
@@ -111,26 +113,25 @@ public class BrickBreak{
     
     for(int i=0;;i++){
       // ball-paddle collisions
-      if( balls.get(0).colliding( playerPaddle.getRectangle() ) ){
+      if( balls.get(0).colliding( playerPaddle.getRectangle() )){
         balls.get(0).resolvePaddleCollision(playerPaddle);
       }
       // ball-brick collisions
       for(int b = 0; b<bricks.size(); b++){
-        if(balls.get(0).colliding( bricks.get(b).getRectangle() ) ){
+        if(balls.get(0).colliding( bricks.get(b).getRectangle() )){
           if((currentPowers[1].getActive()) == false) // cyan power-up removes collissions
             balls.get(0).resolveCollision(bricks.get(b).getRectangle());
           addPowers(currentPowers,bricks.get(b),balls.get(0),playerPaddle);
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
-          if(currentLevel != -1){
+          if(currentLevel != -1)
             score++;
-          }
         }
       }
       // ball-wall collisions
       balls.get(0).resolveWallCollisions(gameWindow);
       
-      // executes every time .pause() is called
+      // executes once every time .pause() is called
       if(i%frames==0){
         // player controls
         if(gameWindow.rightPressed()){
@@ -149,20 +150,21 @@ public class BrickBreak{
           for(int j=0;j<10;j++){
             updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
           }
+          // if in the you lose screen, just re-load the you lose screen
           if(currentLevel == -1){
             levels.load(currentLevel, gameWindow);
           }
           else{
             currentLevel++;
             if(currentLevel>lastLevel)
-              currentLevel=0;
+              currentLevel=0; // the you win screen
             levels.load(currentLevel, gameWindow);
           }
           System.out.println("Current Score: " +score);
         }
-        // check for game over
+        // check for player lose
         if(balls.get(0).getYPosition()>windowHeight){
-          currentLevel = -1; // game over screen
+          currentLevel = -1; // the you lose screen
           // ticks down all power ups on new level
           for(int j=0;j<10;j++){
             updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
@@ -175,13 +177,16 @@ public class BrickBreak{
         }
         
         // executes roughly every second
-        if(i%(frames*60)==0){
+        if(i%(frames*50)==0){
           updatePowerUpTimers(currentPowers, balls.get(0), playerPaddle);
           i=0; // resets i to 0 to prevent int overflow
         }
         
         gameWindow.pause();
       }
+      // updates the position of the ball by a fraction of it's speed.
+      // intended to execute multiple times before .pause() is called
+      // for collission detection accuracy
       balls.get(0).updatePosFraction(frames);
     }
   }
