@@ -83,9 +83,10 @@ public class BrickBreakerWeek15{
   public static void main( String[] args ){
     
     final int frames = 10; // number of game loop executions before .pause() is called
-    int currentLevel = 1;
+    int currentLevel = 0;
     int lastLevel = 3;
     int paddleMoveSpeed = 7;
+    int score = 0;
     
     PowerUp[] currentPowers = new PowerUp[PowerUp.powers.length];
     for(int i=0; i<currentPowers.length; i++){
@@ -117,6 +118,9 @@ public class BrickBreakerWeek15{
           addPowers(currentPowers,bricks.get(b),balls.get(0),playerPaddle);
           bricks.get(b).remove(gameWindow);
           bricks.remove(bricks.get(b));
+          if(currentLevel != -1){
+            score++;
+          }
         }
       }
       // ball-wall collisions
@@ -150,6 +154,7 @@ public class BrickBreakerWeek15{
               currentLevel=0;
             levels.load(currentLevel, gameWindow);
           }
+          System.out.println("Current Score: " +score);
         }
         // check for game over
         if(balls.get(0).getYPosition()>windowHeight){
@@ -162,6 +167,7 @@ public class BrickBreakerWeek15{
           balls.get(0).setPosition(new double[]{windowLength/4,windowHeight-35});
           balls.get(0).setVelocity(new double[]{1,0});
           levels.load(currentLevel, gameWindow);
+          System.out.println("final Score: " +score);
         }
         
         // executes roughly every second

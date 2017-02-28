@@ -46,12 +46,12 @@ public class BrickBreakerLevels{
           System.out.println("Invalid level loaded"); System.exit(0);
       }
       BufferedReader levelFile = new BufferedReader(new FileReader(levelFileName));
-      System.out.println("Loading file....");
+      //System.out.println("Loading file....");
       for( int k=0; (line = levelFile.readLine()) != null; k++ ){
         levelInput[k] = line.split(",");
       }
       levelFile.close();
-      System.out.println("File loaded");
+      //System.out.println("File loaded");
     }catch(java.io.IOException ex){
       System.out.println("Failed to load file!");
     }
